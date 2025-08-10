@@ -158,6 +158,9 @@ vim.o.inccommand = 'split'
 -- Show which line your cursor is on
 vim.o.cursorline = true
 
+-- Highlight the column your cursor is on
+vim.o.cursorcolumn = true
+
 -- Minimal number of screen lines to keep above and below the cursor.
 vim.o.scrolloff = 10
 
@@ -905,6 +908,7 @@ require('lazy').setup({
       vim.cmd 'colorscheme melange'
       vim.api.nvim_set_hl(0, 'Normal', { bg = '#161111' })
       vim.api.nvim_set_hl(0, 'String', { fg = '#886499' })
+      vim.api.nvim_set_hl(0, 'IncSearch', { bg = 'NONE' })
     end,
   },
 
