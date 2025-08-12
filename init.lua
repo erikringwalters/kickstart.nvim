@@ -410,11 +410,12 @@ require('lazy').setup({
         -- You can put your default mappings / updates / etc. in here
         --  All the info you're looking for is in `:help telescope.setup()`
         --
-        -- defaults = {
-        --   mappings = {
-        --     i = { ['<c-enter>'] = 'to_fuzzy_refine' },
-        --   },
-        -- },
+        defaults = {
+          --   mappings = {
+          --     i = { ['<c-enter>'] = 'to_fuzzy_refine' },
+          --   },
+          file_ignore_patterns = { 'target' },
+        },
         -- pickers = {}
         extensions = {
           ['ui-select'] = {
@@ -946,7 +947,7 @@ require('lazy').setup({
     main = 'nvim-treesitter.configs', -- Sets main module to use for opts
     -- [[ Configure Treesitter ]] See `:help nvim-treesitter`
     opts = {
-      ensure_installed = { 'bash', 'c', 'diff', 'html', 'lua', 'luadoc', 'markdown', 'markdown_inline', 'query', 'vim', 'vimdoc' },
+      ensure_installed = { 'bash', 'c', 'diff', 'html', 'lua', 'luadoc', 'markdown', 'markdown_inline', 'query', 'rust', 'vim', 'vimdoc' },
       -- Autoinstall languages that are not installed
       auto_install = true,
       highlight = {
@@ -981,7 +982,6 @@ require('lazy').setup({
   require 'kickstart.plugins.autopairs',
   -- require 'kickstart.plugins.neo-tree',
   require 'kickstart.plugins.gitsigns', -- adds gitsigns recommend keymaps
-  -- require 'config.mappings',
 
   -- NOTE: The import below can automatically add your own plugins, configuration, etc from `lua/custom/plugins/*.lua`
   --    This is the easiest way to modularize your config.
@@ -993,6 +993,42 @@ require('lazy').setup({
   -- Or use telescope!
   -- In normal mode type `<space>sh` then write `lazy.nvim-plugin`
   -- you can continue same window with `<space>sr` which resumes last telescope search
+
+  -- Erik's additional loading
+  -- LSP Diagnostics Options Setup
+  --   {
+  --     function(opts)
+  --       vim.fn.sign_define(opts.name, {
+  --         texthl = opts.name,
+  --         text = opts.text,
+  --         numhl = '',
+  --       })
+  --     end,
+  --
+  --     sign { name = 'DiagnosticSignError', text = '' },
+  --     sign { name = 'DiagnosticSignWarn', text = '' },
+  --     sign { name = 'DiagnosticSignHint', text = '' },
+  --     sign { name = 'DiagnosticSignInfo', text = '' },
+  --
+  --     vim.diagnostic.config {
+  --       virtual_text = false,
+  --       signs = true,
+  --       update_in_insert = true,
+  --       underline = true,
+  --       severity_sort = false,
+  --       float = {
+  --         border = 'rounded',
+  --         source = 'always',
+  --         header = '',
+  --         prefix = '',
+  --       },
+  --     },
+  --
+  --     vim.cmd [[
+  -- set signcolumn=yes
+  -- autocmd CursorHold * lua vim.diagnostic.open_float(nil, { focusable = false })
+  -- ]],
+  --   },
 }, {
   ui = {
     -- If you are using a Nerd Font: set icons to an empty table which will use the
