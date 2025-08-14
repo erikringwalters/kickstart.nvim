@@ -4,6 +4,18 @@
 -- See the kickstart.nvim README for more information
 return {
   -- ***Erik's plugins*** --
+  {
+    'lukas-reineke/indent-blankline.nvim',
+    main = 'ibl',
+    opts = {},
+    config = function(_, opts)
+      require('ibl').setup(opts)
+      -- now override highlight
+      vim.schedule(function()
+        vim.api.nvim_set_hl(0, '@ibl.scope.underline.1', { underline = false })
+      end)
+    end,
+  },
 
   -- Melange theme with custom colors
   {
@@ -12,8 +24,9 @@ return {
     priority = 1000,
     config = function()
       vim.cmd 'colorscheme melange'
-      vim.api.nvim_set_hl(0, 'Normal', { bg = '#080606' })
+      vim.api.nvim_set_hl(0, 'Normal', { bg = '#0E0B0B' })
       vim.api.nvim_set_hl(0, 'String', { fg = '#7E6B96' })
+      vim.api.nvim_set_hl(0, '@ibl.scope.underline.1', { underline = false })
       local bg = vim.opt.background:get()
       local palette = require('melange/palettes/' .. bg)
       vim.g.terminal_color_9 = palette.b.bg
@@ -28,85 +41,73 @@ return {
     },
   },
 
-  -- Rust configs
+  -- LSP config
+  {
+    'neovim/nvim-lspconfig',
+    config = function()
+      local lspconfig = require 'lspconfig'
+
+      -- Rust Analyzer setup
+      lspconfig.rust_analyzer.setup {
+        settings = {
+          ['rust-analyzer'] = {
+            cargo = { allFeatures = true },
+            diagnostics = {
+              enable = true,
+              experimental = { enable = true },
+            },
+            checkOnSave = {
+              enable = true,
+              command = 'clippy',
+            },
+            assist = {
+              importGranularity = 'module',
+              importPrefix = 'by_self',
+            },
+            imports = {
+              granularity = { group = 'module' },
+              prefix = 'self',
+            },
+            completion = {
+              autoimport = { enable = true },
+              postfix = { enable = true },
+            },
+          },
+        },
+        flags = {
+          allow_incremental_sync = true,
+          diagnostics = { refreshSupport = false },
+        },
+      }
+
+      -- Make diagnostics update instantly (not only on save)
+      vim.diagnostic.config {
+        update_in_insert = true,
+        virtual_text = true,
+        signs = true,
+        underline = true,
+      }
+    end,
+  },
+
+  -- -- Optional: Mason to install rust-analyzer automatically
   -- {
-  --   'rust-lang/rust-analyzer',
-  -- },
-  -- {
-  --   'rust-lang/rust.vim',
-  --   ft = 'rust',
-  --   init = function()
-  --     vim.g.rustfmt_autosave = 1
+  --   'williamboman/mason.nvim',
+  --   build = ':MasonUpdate',
+  --   config = function()
+  --     require('mason').setup()
   --   end,
   -- },
   -- {
-  --   'saecki/crates.nvim',
-  --   ft = { 'toml' },
-  --   config = function(_, opts)
-  --     local crates = require 'crates'
-  --     crates.setup(opts)
-  --     require('cmp').setup.buffer {
-  --       sources = { { name = 'crates' } },
+  --   'williamboman/mason-lspconfig.nvim',
+  --   config = function()
+  --     require('mason-lspconfig').setup {
+  --       ensure_installed = { 'rust_analyzer' },
   --     }
-  --     crates.show()
-  --     require('core.utils').load_mappings 'crates'
   --   end,
   -- },
-  -- {
-  --   'theHamsta/nvim-dap-virtual-text',
-  --   lazy = false,
-  --   config = function(_, opts)
-  --     require 'nvim-dap-virtual-text'
-  --   end,
-  -- },
-  -- {
-  --   'mfussenegger/nvim-dap',
-  -- },
-  -- {
-  --   'rcarriga/nvim-dap-ui',
-  --   dependencies = { 'mfussenegger/nvim-dap', 'nvim-neotest/nvim-nio' },
-  --   config = function()
-  --     require('dapui').setup()
-  --   end,
-  -- },
-  -- {
-  --   'mfussenegger/nvim-dap',
-  --   config = function()
-  --     local dap, dapui = require 'dap', require 'dapui'
-  --     dap.listeners.before.attach.dapui_config = function()
-  --       dapui.open()
-  --     end
-  --     dap.listeners.before.launch.dapui_config = function()
-  --       dapui.open()
-  --     end
-  --     dap.listeners.before.event_terminated.dapui_config = function()
-  --       dapui.close()
-  --     end
-  --     dap.listeners.before.event_exited.dapui_config = function()
-  --       dapui.close()
-  --     end
-  --   end,
-  -- },
-  -- {
-  --   'rcarriga/nvim-dap-ui',
-  --   dependencies = { 'mfussenegger/nvim-dap', 'nvim-neotest/nvim-nio' },
-  --   config = function()
-  --     require('dapui').setup()
-  --   end,
-  -- },
-  -- {
-  --   'vadimcn/codelldb',
-  -- },
-  -- {
-  --   'hrsh7th/nvim-cmp',
-  -- },
-  -- {
-  --   'hrsh7th/cmp-nvim-lsp',
-  -- },
-  -- { 'hrsh7th/cmp-nvim-lua' },
-  -- { 'hrsh7th/cmp-nvim-lsp-signature-help' },
-  -- { 'hrsh7th/cmp-vsnip' },
-  -- { 'hrsh7th/cmp-path' },
-  -- { 'hrsh7th/cmp-buffer' },
-  -- { 'hrsh7th/vim-vsnip' },
+
+  vim.keymap.set('n', '<leader>qf', function()
+    vim.lsp.buf.code_action()
+  end, { desc = 'LSP [Q]uick [F]ix' }),
 }
