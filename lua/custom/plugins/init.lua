@@ -2,6 +2,7 @@
 --  I promise not to create any merge conflicts in this directory :)
 --
 -- See the kickstart.nvim README for more information
+
 return {
   -- ***Erik's plugins*** --
   {
@@ -42,72 +43,57 @@ return {
   },
 
   -- LSP config
-  {
-    'neovim/nvim-lspconfig',
-    config = function()
-      local lspconfig = require 'lspconfig'
-
-      -- Rust Analyzer setup
-      lspconfig.rust_analyzer.setup {
-        settings = {
-          ['rust-analyzer'] = {
-            cargo = { allFeatures = true },
-            diagnostics = {
-              enable = true,
-              experimental = { enable = true },
-            },
-            checkOnSave = {
-              enable = true,
-              command = 'clippy',
-            },
-            assist = {
-              importGranularity = 'module',
-              importPrefix = 'by_self',
-            },
-            imports = {
-              granularity = { group = 'module' },
-              prefix = 'self',
-            },
-            completion = {
-              autoimport = { enable = true },
-              postfix = { enable = true },
-            },
-          },
-        },
-        flags = {
-          allow_incremental_sync = true,
-          diagnostics = { refreshSupport = false },
-        },
-      }
-
-      -- Make diagnostics update instantly (not only on save)
-      vim.diagnostic.config {
-        update_in_insert = true,
-        virtual_text = true,
-        signs = true,
-        underline = true,
-      }
-    end,
-  },
-
-  -- -- Optional: Mason to install rust-analyzer automatically
   -- {
-  --   'williamboman/mason.nvim',
-  --   build = ':MasonUpdate',
+  --   'neovim/nvim-lspconfig',
   --   config = function()
-  --     require('mason').setup()
-  --   end,
-  -- },
-  -- {
-  --   'williamboman/mason-lspconfig.nvim',
-  --   config = function()
-  --     require('mason-lspconfig').setup {
-  --       ensure_installed = { 'rust_analyzer' },
+  --     local lspconfig = require 'lspconfig'
+  --
+  --     -- Rust Analyzer setup
+  --     lspconfig.rust_analyzer.setup {
+  --       -- cmd = { vim.fn.expand '~/.cargo/bin/rust-analyzer' },
+  --       settings = {
+  --         ['rust-analyzer'] = {
+  --           mason = true,
+  --           -- cargo = { allFeatures = false },
+  --           diagnostics = {
+  --             -- enable = true,
+  --             -- experimental = { enable = false },
+  --           },
+  --           checkOnSave = {
+  --             enable = true,
+  --             -- command = 'clippy',
+  --           },
+  --           assist = {
+  --             -- importGranularity = 'module',
+  --             -- importPrefix = 'by_self',
+  --           },
+  --           imports = {
+  --             -- granularity = { group = 'module' },
+  --             -- prefix = 'self',
+  --           },
+  --           completion = {
+  --             autoimport = { enable = true },
+  --             -- postfix = { enable = false },
+  --           },
+  --         },
+  --       },
+  --       flags = {
+  --         -- allow_incremental_sync = true,
+  --         -- diagnostics = { refreshSupport = false },
+  --       },
+  --     }
+  --
+  --     -- Make diagnostics update instantly (not only on save)
+  --     vim.diagnostic.config {
+  --       update_in_insert = true,
+  --       virtual_text = true,
+  --       signs = true,
+  --       underline = true,
   --     }
   --   end,
   -- },
-
-  vim.keymap.set('n', '<leader>qf', function()
+  -- Quick Fix
+  vim.keymap.set('n', '<leader>a', function()
     vim.lsp.buf.code_action()
-  end, { desc = 'LSP [Q]uick [F]ix' }),
+  end, { desc = 'LSP Code [A]ction' }),
 }
