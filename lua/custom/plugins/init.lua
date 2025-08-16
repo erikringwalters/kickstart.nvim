@@ -43,55 +43,63 @@ return {
   },
 
   -- LSP config
-  -- {
-  --   'neovim/nvim-lspconfig',
-  --   config = function()
-  --     local lspconfig = require 'lspconfig'
-  --
-  --     -- Rust Analyzer setup
-  --     lspconfig.rust_analyzer.setup {
-  --       -- cmd = { vim.fn.expand '~/.cargo/bin/rust-analyzer' },
-  --       settings = {
-  --         ['rust-analyzer'] = {
-  --           mason = true,
-  --           -- cargo = { allFeatures = false },
-  --           diagnostics = {
-  --             -- enable = true,
-  --             -- experimental = { enable = false },
-  --           },
-  --           checkOnSave = {
-  --             enable = true,
-  --             -- command = 'clippy',
-  --           },
-  --           assist = {
-  --             -- importGranularity = 'module',
-  --             -- importPrefix = 'by_self',
-  --           },
-  --           imports = {
-  --             -- granularity = { group = 'module' },
-  --             -- prefix = 'self',
-  --           },
-  --           completion = {
-  --             autoimport = { enable = true },
-  --             -- postfix = { enable = false },
-  --           },
-  --         },
-  --       },
-  --       flags = {
-  --         -- allow_incremental_sync = true,
-  --         -- diagnostics = { refreshSupport = false },
-  --       },
-  --     }
-  --
-  --     -- Make diagnostics update instantly (not only on save)
-  --     vim.diagnostic.config {
-  --       update_in_insert = true,
-  --       virtual_text = true,
-  --       signs = true,
-  --       underline = true,
-  --     }
-  --   end,
-  -- },
+  {
+    'neovim/nvim-lspconfig',
+    config = function()
+      local lspconfig = require 'lspconfig'
+
+      -- Rust Analyzer setup
+      lspconfig.rust_analyzer.setup {
+        -- cmd = { vim.fn.expand '~/.cargo/bin/rust-analyzer' },
+        settings = {
+          ['rust-analyzer'] = {
+            cargo = { allFeatures = false },
+            procMacro = {
+              ignored = {
+                bevy_simple_subsecond_system_macros = {
+                  'hot',
+                },
+              },
+            },
+            diagnostics = {
+              enable = true,
+              experimental = { enable = false },
+              disabled = { 'proc-macro-disabled' },
+            },
+            checkOnSave = {
+              enable = true,
+              command = 'clippy',
+            },
+            assist = {
+              importGranularity = 'module',
+              importPrefix = 'by_self',
+            },
+            imports = {
+              granularity = { group = 'module' },
+              prefix = 'self',
+            },
+            completion = {
+              autoimport = { enable = true },
+              postfix = { enable = true },
+            },
+          },
+        },
+        flags = {
+          allow_incremental_sync = true,
+          diagnostics = { refreshSupport = true },
+        },
+      }
+
+      -- Make diagnostics update instantly (not only on save)
+      vim.diagnostic.config {
+        update_in_insert = true,
+        virtual_text = true,
+        signs = true,
+        underline = true,
+      }
+    end,
+  },
+
   -- Quick Fix
   vim.keymap.set('n', '<leader>a', function()
     vim.lsp.buf.code_action()
