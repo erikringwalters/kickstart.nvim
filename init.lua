@@ -208,6 +208,28 @@ vim.keymap.set('n', '<C-k>', '<C-w><C-k>', { desc = 'Move focus to the upper win
 -- vim.keymap.set("n", "<C-S-j>", "<C-w>J", { desc = "Move window to the lower" })
 -- vim.keymap.set("n", "<C-S-k>", "<C-w>K", { desc = "Move window to the upper" })
 
+-- Save file with Leader key
+vim.keymap.set('n', '<Leader>w', ':w<CR>', { desc = 'Save file', noremap = true, silent = true })
+
+-- Quit Neovim with Leader key
+vim.keymap.set('n', '<Leader>q', ':q<CR>', { desc = 'Quit Neovim', noremap = true, silent = true })
+
+-- Open file explorer with Leader key
+vim.keymap.set('n', '<Leader>e', ':Ex<CR>', { desc = 'Open file explorer', noremap = true, silent = true })
+
+-- Cargo commands
+-- Run command cargo run with Leader key
+vim.keymap.set('n', '<Leader>cR', ':!cargo run<CR>', { desc = 'cargo run', noremap = true, silent = true })
+
+-- Run command cargo run --release with Leader key
+vim.keymap.set('n', '<Leader>cr', ':!cargo run --release<CR>', { desc = 'cargo run --release', noremap = true, silent = true })
+
+-- Run command cargo build with Leader key
+vim.keymap.set('n', '<Leader>cb', ':!cargo build<CR>', { desc = 'cargo build', noremap = true, silent = true })
+
+-- Run command cargo run --release with Leader key
+vim.keymap.set('n', '<Leader>cC', ':!cargo clean<CR>', { desc = 'cargo clean', noremap = true, silent = true })
+
 -- [[ Basic Autocommands ]]
 --  See `:help lua-guide-autocommands`
 
