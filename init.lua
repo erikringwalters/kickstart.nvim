@@ -236,7 +236,6 @@ vim.keymap.set('n', '<Leader>x', '<C-\\><C-n>i<C-c><CR>', { desc = 'exit to norm
 -- -- Custom terminal colors
 vim.opt.termguicolors = true
 
--- vim.g.terminal_ansi_colors = my_terminal_colors
 vim.api.nvim_create_autocmd('TermOpen', {
   callback = function()
     local terminal_colors = {
@@ -273,6 +272,9 @@ vim.api.nvim_create_autocmd('TermOpen', {
     vim.g.terminal_color_13 = terminal_colors[13]
     vim.g.terminal_color_14 = terminal_colors[14]
     vim.g.terminal_color_15 = terminal_colors[15]
+
+    -- Go to bottom of terminal output
+    vim.cmd 'norm G'
   end,
 })
 
