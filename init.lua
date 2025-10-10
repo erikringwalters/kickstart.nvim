@@ -219,16 +219,62 @@ vim.keymap.set('n', '<Leader>e', ':Ex<CR>', { desc = 'Open file explorer', norem
 
 -- Cargo commands
 -- Run command cargo run with Leader key
-vim.keymap.set('n', '<Leader>cR', ':!cargo run<CR>', { desc = 'cargo run', noremap = true, silent = true })
+vim.keymap.set('n', '<Leader>cR', ':terminal cargo run<CR>', { desc = 'cargo run', noremap = true, silent = true })
 
 -- Run command cargo run --release with Leader key
-vim.keymap.set('n', '<Leader>cr', ':!cargo run --release<CR>', { desc = 'cargo run --release', noremap = true, silent = true })
+vim.keymap.set('n', '<Leader>cr', ':terminal cargo run --release<CR>', { desc = 'cargo run --release', noremap = true, silent = true })
 
 -- Run command cargo build with Leader key
-vim.keymap.set('n', '<Leader>cb', ':!cargo build<CR>', { desc = 'cargo build', noremap = true, silent = true })
+vim.keymap.set('n', '<Leader>cb', ':terminal cargo build<CR>', { desc = 'cargo build', noremap = true, silent = true })
 
 -- Run command cargo run --release with Leader key
-vim.keymap.set('n', '<Leader>cC', ':!cargo clean<CR>', { desc = 'cargo clean', noremap = true, silent = true })
+vim.keymap.set('n', '<Leader>cC', ':terminal cargo clean<CR>', { desc = 'cargo clean', noremap = true, silent = true })
+
+-- Exit app and return to normal mode
+vim.keymap.set('n', '<Leader>x', '<C-\\><C-n>i<C-c><CR>', { desc = 'exit to normal mode', noremap = true, silent = true })
+
+-- -- Custom terminal colors
+vim.opt.termguicolors = true
+
+-- vim.g.terminal_ansi_colors = my_terminal_colors
+vim.api.nvim_create_autocmd('TermOpen', {
+  callback = function()
+    local terminal_colors = {
+      '#7D2A2F', -- dark red
+      '#78997A', -- mint
+      '#EBC06D', -- yellow
+      '#273142', -- dark blue
+      '#C1A78E', -- beige
+      '#7B9695', -- soft light blue
+      '#B380B0', -- pink
+      '#89B3B6', -- bright blue
+      '#7D2A2F', -- dark red
+      '#253333', -- dark green
+      '#8B7449', -- dark yellow
+      '#7B9695', -- soft light blue
+      '#7E6B96', -- purple
+      '#7B9695', -- soft light blue
+      '#7E6B96', -- purple
+      '#7B9695', -- soft light blue
+    }
+    vim.g.terminal_color_0 = terminal_colors[0]
+    vim.g.terminal_color_1 = terminal_colors[1]
+    vim.g.terminal_color_2 = terminal_colors[2]
+    vim.g.terminal_color_3 = terminal_colors[3]
+    vim.g.terminal_color_4 = terminal_colors[4]
+    vim.g.terminal_color_5 = terminal_colors[5]
+    vim.g.terminal_color_6 = terminal_colors[6]
+    vim.g.terminal_color_7 = terminal_colors[7]
+    vim.g.terminal_color_8 = terminal_colors[8]
+    vim.g.terminal_color_9 = terminal_colors[9]
+    vim.g.terminal_color_10 = terminal_colors[10]
+    vim.g.terminal_color_11 = terminal_colors[11]
+    vim.g.terminal_color_12 = terminal_colors[12]
+    vim.g.terminal_color_13 = terminal_colors[13]
+    vim.g.terminal_color_14 = terminal_colors[14]
+    vim.g.terminal_color_15 = terminal_colors[15]
+  end,
+})
 
 -- [[ Basic Autocommands ]]
 --  See `:help lua-guide-autocommands`
