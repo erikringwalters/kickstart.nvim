@@ -246,12 +246,12 @@ vim.api.nvim_create_autocmd('TermOpen', {
       '#C1A78E', -- beige
       '#7B9695', -- soft light blue
       '#B380B0', -- pink
-      '#89B3B6', -- bright blue
-      '#7D2A2F', -- dark red
       '#253333', -- dark green
-      '#8B7449', -- dark yellow
-      '#7B9695', -- soft light blue
+      '#7D2A2F', -- dark red
       '#7E6B96', -- purple
+      '#8B7449', -- dark yellow
+      '#89B3B6', -- bright blue
+      '#7B9695', -- soft light blue
       '#7B9695', -- soft light blue
       '#7E6B96', -- purple
       '#7B9695', -- soft light blue
