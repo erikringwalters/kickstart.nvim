@@ -219,16 +219,16 @@ vim.keymap.set('n', '<Leader>e', ':Ex<CR>', { desc = 'Open file explorer', norem
 
 -- Cargo commands
 -- Run command cargo run with Leader key
-vim.keymap.set('n', '<Leader>cR', ':terminal cargo run<CR>', { desc = 'cargo run', noremap = true, silent = true })
+vim.keymap.set('n', '<Leader>cR', ':wa<CR>:terminal cargo run<CR>', { desc = 'cargo run', noremap = true, silent = true })
 
 -- Run command cargo run --release with Leader key
-vim.keymap.set('n', '<Leader>cr', ':terminal cargo run --release<CR>', { desc = 'cargo run --release', noremap = true, silent = true })
+vim.keymap.set('n', '<Leader>cr', ':wa<CR>:terminal cargo run --release<CR>', { desc = 'cargo run --release', noremap = true, silent = true })
 
 -- Run command cargo build with Leader key
-vim.keymap.set('n', '<Leader>cb', ':terminal cargo build<CR>', { desc = 'cargo build', noremap = true, silent = true })
+vim.keymap.set('n', '<Leader>cb', ':wa<CR>:terminal cargo build<CR>', { desc = 'cargo build', noremap = true, silent = true })
 
 -- Run command cargo run --release with Leader key
-vim.keymap.set('n', '<Leader>cC', ':terminal cargo clean<CR>', { desc = 'cargo clean', noremap = true, silent = true })
+vim.keymap.set('n', '<Leader>cC', ':wa<CR>:terminal cargo clean<CR>', { desc = 'cargo clean', noremap = true, silent = true })
 
 -- Exit app and return to normal mode
 vim.keymap.set('n', '<Leader>x', '<C-\\><C-n>i<C-c><CR>', { desc = 'exit to normal mode', noremap = true, silent = true })
