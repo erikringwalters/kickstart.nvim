@@ -208,30 +208,39 @@ vim.keymap.set('n', '<C-k>', '<C-w><C-k>', { desc = 'Move focus to the upper win
 -- vim.keymap.set("n", "<C-S-j>", "<C-w>J", { desc = "Move window to the lower" })
 -- vim.keymap.set("n", "<C-S-k>", "<C-w>K", { desc = "Move window to the upper" })
 
--- Save file with Leader key
-vim.keymap.set('n', '<Leader>w', ':w<CR>', { desc = 'Save file', noremap = true, silent = true })
+-- Save file
+vim.keymap.set('n', '<Leader>w', ':wa<CR>', { desc = 'Save file', noremap = true, silent = true })
 
--- Quit Neovim with Leader key
+-- Quit Neovim
 vim.keymap.set('n', '<Leader>q', ':q<CR>', { desc = 'Quit Neovim', noremap = true, silent = true })
 
--- Open file explorer with Leader key
+-- Open file explorer
 vim.keymap.set('n', '<Leader>e', ':Ex<CR>', { desc = 'Open file explorer', noremap = true, silent = true })
 
 -- Cargo commands
--- Run command cargo run with Leader key
+-- Run command cargo run
 vim.keymap.set('n', '<Leader>cR', ':wa<CR>:terminal cargo run<CR>', { desc = 'cargo run', noremap = true, silent = true })
 
--- Run command cargo run --release with Leader key
+-- Run command cargo run --release
 vim.keymap.set('n', '<Leader>cr', ':wa<CR>:terminal cargo run --release<CR>', { desc = 'cargo run --release', noremap = true, silent = true })
 
--- Run command cargo build with Leader key
+-- Run command cargo build
 vim.keymap.set('n', '<Leader>cb', ':wa<CR>:terminal cargo build<CR>', { desc = 'cargo build', noremap = true, silent = true })
 
--- Run command cargo run --release with Leader key
+-- Run command cargo clean
 vim.keymap.set('n', '<Leader>cC', ':wa<CR>:terminal cargo clean<CR>', { desc = 'cargo clean', noremap = true, silent = true })
 
 -- Exit app and return to normal mode
 vim.keymap.set('n', '<Leader>x', '<C-\\><C-n>i<C-c><CR>', { desc = 'exit to normal mode', noremap = true, silent = true })
+
+-- Run with Dioxus hot-patching
+vim.keymap.set('n', '<Leader>cd', ':wa<CR>:terminal dx serve --hot-patch<CR>', { desc = 'dx serve --hot-patch', noremap = true, silent = true })
+
+-- Bevy Run and Open for Web
+vim.keymap.set('n', '<Leader>cw', ':wa<CR>:terminal bevy run web --open<CR>', { desc = 'bevy run web --open', noremap = true, silent = true })
+
+-- Bevy Build for Web
+vim.keymap.set('n', '<Leader>cW', ':wa<CR>:terminal bevy build --release web<CR>', { desc = 'bevy build --release web', noremap = true, silent = true })
 
 -- -- Custom terminal colors
 vim.opt.termguicolors = true
@@ -484,7 +493,7 @@ require('lazy').setup({
           --   mappings = {
           --     i = { ['<c-enter>'] = 'to_fuzzy_refine' },
           --   },
-          file_ignore_patterns = { 'target' },
+          file_ignore_patterns = { 'target', '*.bin', '*.glb', 'assets' },
         },
         -- pickers = {}
         extensions = {
