@@ -493,7 +493,7 @@ require('lazy').setup({
           --   mappings = {
           --     i = { ['<c-enter>'] = 'to_fuzzy_refine' },
           --   },
-          file_ignore_patterns = { 'target', '*.bin', '*.glb', 'assets' },
+          file_ignore_patterns = { 'target', '[^a-Z].bin', '[^a-Z].glb' },
         },
         -- pickers = {}
         extensions = {
