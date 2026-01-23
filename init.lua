@@ -242,6 +242,12 @@ vim.keymap.set('n', '<Leader>cw', ':wa<CR>:terminal bevy run web --open<CR>', { 
 -- Bevy Build for Web
 vim.keymap.set('n', '<Leader>cW', ':wa<CR>:terminal bevy build --release web<CR>', { desc = 'bevy build --release web', noremap = true, silent = true })
 
+-- Show errors list
+vim.keymap.set('n', '<Leader>r', function()
+  vim.diagnostic.setqflist()
+  vim.cmd 'copen'
+end)
+
 -- -- Custom terminal colors
 vim.opt.termguicolors = true
 
