@@ -177,7 +177,7 @@ vim.o.confirm = true
 vim.keymap.set('n', '<Esc>', '<cmd>nohlsearch<CR>')
 
 -- Diagnostic keymaps
-vim.keymap.set('n', '<leader>q', vim.diagnostic.setloclist, { desc = 'Open diagnostic [Q]uickfix list' })
+vim.keymap.set('n', '<leader>qf', vim.diagnostic.setloclist, { desc = 'Open diagnostic [Q]uick[f]ix list' })
 
 -- Exit terminal mode in the builtin terminal with a shortcut that is a bit easier
 -- for people to discover. Otherwise, you normally need to press <C-\><C-n>, which
@@ -211,8 +211,20 @@ vim.keymap.set('n', '<C-k>', '<C-w><C-k>', { desc = 'Move focus to the upper win
 -- Save file
 vim.keymap.set('n', '<Leader>w', ':wa<CR>', { desc = 'Save file', noremap = true, silent = true })
 
--- Quit Neovim
-vim.keymap.set('n', '<Leader>q', ':q<CR>', { desc = 'Quit Neovim', noremap = true, silent = true })
+-- Quit Current Window
+vim.keymap.set('n', '<Leader>qq', ':q<CR>', { desc = 'Quit Current Window', noremap = true, silent = true })
+
+-- Quit left Window
+vim.keymap.set('n', '<Leader>qh', '<C-w><C-h>:q<CR>', { desc = 'Quit Left Window', noremap = true, silent = true })
+
+-- Quit right Window
+vim.keymap.set('n', '<Leader>ql', '<C-w><C-l>:q<CR>', { desc = 'Quit Right Window', noremap = true, silent = true })
+
+-- Quit lower Window
+vim.keymap.set('n', '<Leader>qj', '<C-w><C-j>:q<CR>', { desc = 'Quit Lower Window', noremap = true, silent = true })
+
+-- Quit upper Window
+vim.keymap.set('n', '<Leader>qk', '<C-w><C-k>:q<CR>', { desc = 'Quit Upper Window', noremap = true, silent = true })
 
 -- Open file explorer
 vim.keymap.set('n', '<Leader>e', ':Ex<CR>', { desc = 'Open file explorer', noremap = true, silent = true })
@@ -224,6 +236,9 @@ vim.keymap.set('n', '<Leader>cR', ':wa<CR>:terminal cargo run<CR>', { desc = 'ca
 -- Run command cargo run --release
 vim.keymap.set('n', '<Leader>cr', ':wa<CR>:terminal cargo run --release<CR>', { desc = 'cargo run --release', noremap = true, silent = true })
 
+-- Run command cargo run --release -- --debug=true
+vim.keymap.set('n', '<Leader>cd', ':wa<CR>:terminal cargo run --release -- --debug<CR>', { desc = 'cargo run --release', noremap = true, silent = true })
+
 -- Run command cargo build
 vim.keymap.set('n', '<Leader>cb', ':wa<CR>:terminal cargo build<CR>', { desc = 'cargo build', noremap = true, silent = true })
 
@@ -234,7 +249,7 @@ vim.keymap.set('n', '<Leader>cC', ':wa<CR>:terminal cargo clean<CR>', { desc = '
 vim.keymap.set('n', '<Leader>x', '<C-\\><C-n>i<C-c><CR>', { desc = 'exit to normal mode', noremap = true, silent = true })
 
 -- Run with Dioxus hot-patching
-vim.keymap.set('n', '<Leader>cd', ':wa<CR>:terminal dx serve --hot-patch<CR>', { desc = 'dx serve --hot-patch', noremap = true, silent = true })
+vim.keymap.set('n', '<Leader>ch', ':wa<CR>:terminal dx serve --hot-patch<CR>', { desc = 'dx serve --hot-patch', noremap = true, silent = true })
 
 -- Bevy Run and Open for Web
 vim.keymap.set('n', '<Leader>cw', ':wa<CR>:terminal bevy run web --open<CR>', { desc = 'bevy run web --open', noremap = true, silent = true })
@@ -499,7 +514,7 @@ require('lazy').setup({
           --   mappings = {
           --     i = { ['<c-enter>'] = 'to_fuzzy_refine' },
           --   },
-          file_ignore_patterns = { 'target', '[^a-Z].bin', '[^a-Z].glb' },
+          file_ignore_patterns = { 'target', '[^a-Z].bin', '[^a-Z].glb', '[^a-Z].ogg', '[^a-Z].wav' },
         },
         -- pickers = {}
         extensions = {
