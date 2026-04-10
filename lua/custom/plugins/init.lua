@@ -143,6 +143,19 @@ return {
         },
       }
 
+      -- Required cargo install --git https://github.com/wgsl-analyzer/wgsl-analyzer wgsl-analyzer
+      -- lspconfig.wgsl_analyzer.setup {
+      --   on_attach = function(client, bufnr)
+      --     -- disabled diagnostics because they are not compatible with Bevy
+      --     client.server_capabilities.diagnosticsProvider = false
+      --   end,
+      --   capabilities = capabilities,
+      -- }
+      vim.opt.expandtab = true
+      vim.opt.shiftwidth = 4
+      vim.opt.tabstop = 4
+      vim.opt.softtabstop = 4
+
       -- Make diagnostics update instantly (not only on save)
       vim.diagnostic.config {
         update_in_insert = true,
@@ -174,7 +187,6 @@ return {
   -- vim.keymap.set('n', '<leader>a', function()
   --   vim.lsp.buf.code_action()
   -- end, { desc = 'LSP Code [A]ction' }),
-
   {
     'hrsh7th/nvim-cmp',
     dependencies = {
