@@ -240,7 +240,7 @@ vim.keymap.set('n', '<Leader>cr', ':wa<CR>:terminal cargo run --release<CR>', { 
 vim.keymap.set('n', '<Leader>cd', ':wa<CR>:terminal cargo run --release -- --debug<CR>', { desc = 'cargo run --release', noremap = true, silent = true })
 
 -- Run command cargo build
-vim.keymap.set('n', '<Leader>cb', ':wa<CR>:terminal cargo build<CR>', { desc = 'cargo build', noremap = true, silent = true })
+vim.keymap.set('n', '<Leader>cb', ':wa<CR>:terminal cargo build --release<CR>', { desc = 'cargo build', noremap = true, silent = true })
 
 -- Run command cargo clean
 vim.keymap.set('n', '<Leader>cC', ':wa<CR>:terminal cargo clean<CR>', { desc = 'cargo clean', noremap = true, silent = true })
@@ -252,7 +252,7 @@ vim.keymap.set('n', '<Leader>x', '<C-\\><C-n>i<C-c><CR>', { desc = 'exit to norm
 vim.keymap.set('n', '<Leader>ch', ':wa<CR>:terminal dx serve --hot-patch<CR>', { desc = 'dx serve --hot-patch', noremap = true, silent = true })
 
 -- Bevy Run and Open for Web
-vim.keymap.set('n', '<Leader>cw', ':wa<CR>:terminal bevy run web --open<CR>', { desc = 'bevy run web --open', noremap = true, silent = true })
+vim.keymap.set('n', '<Leader>cw', ':wa<CR>:terminal bevy run --release web --open<CR>', { desc = 'bevy run web --open', noremap = true, silent = true })
 
 -- Bevy Build for Web
 vim.keymap.set('n', '<Leader>cW', ':wa<CR>:terminal bevy build --release web<CR>', { desc = 'bevy build --release web', noremap = true, silent = true })
